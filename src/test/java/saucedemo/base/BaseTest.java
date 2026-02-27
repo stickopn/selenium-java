@@ -15,6 +15,7 @@ import java.util.Map;
         io.qameta.allure.testng.AllureTestNg.class,
         saucedemo.base.TestListener.class
 })
+
 public abstract class BaseTest {
     protected WebDriver driver;
 
