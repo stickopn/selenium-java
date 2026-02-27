@@ -2,9 +2,9 @@ name: UI Tests (Maven + TestNG)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -19,11 +19,11 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: "17"
           cache: maven
 
-	- name: Run tests
- 	 run: mvn -q clean test
+      - name: Run tests
+        run: mvn -q clean test
 
       - name: Upload Surefire reports (always)
         if: always()
