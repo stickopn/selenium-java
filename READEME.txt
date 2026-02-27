@@ -1,0 +1,129 @@
+# 🚀 Selenium Java Automation Framework
+
+Automated UI test framework built using **Java, Selenium WebDriver, TestNG, Maven and Allure Reports**.
+
+This project demonstrates end-to-end test automation of the [SauceDemo](https://www.saucedemo.com/) web application using the **Page Object Model (POM)** design pattern and clean automation practices.
+
+---
+
+## 🛠 Tech Stack
+
+- Java
+- Selenium WebDriver
+- TestNG
+- Maven
+- WebDriverManager
+- Allure Reports
+- Page Object Model (POM)
+
+---
+
+📂 Project Structure
+src
+└── test
+└── java
+└── saucedemo
+├── base
+│ ├── BaseTest.java
+│ └── TestListener.java
+├── pages
+│ ├── LoginPage.java
+│ ├── ProductsPage.java
+│ ├── CartPage.java
+│ ├── CheckoutInfoPage.java
+│ ├── CheckoutOverviewPage.java
+│ └── CheckoutCompletePage.java
+└── tests
+   ├── LoginTests.java
+   ├── InvalidLoginTests.java
+   ├── AddToCartTests.java
+   ├── RemoveFromCartTests.java
+   ├── CheckoutMissingZipTests.java
+   ├── CheckoutToOverviewTests.java
+   ├── SortTests.java
+   └── LogoutTests.java
+
+---
+
+## ✅ Test Scenarios Covered
+
+- Successful login
+- Invalid login validation
+- Add product to cart
+- Remove product from cart
+- Complete checkout process
+- Checkout validation (missing required fields)
+- Product sorting (A-Z, Z-A, price low-high, high-low)
+- Logout functionality
+
+---
+
+## ▶️ How to Run Tests
+
+Run all tests:
+mvn clean test
+
+
+Run specific test class:
+mvn -Dtest=LoginTests test
+
+
+---
+
+## 📊 Generate Allure Report
+
+After running tests:
+allure serve target/allure-results
+
+
+This will generate and open an interactive test report in your browser.
+
+---
+
+## 🧠 Framework Highlights
+
+- Page Object Model architecture
+- Reusable login method in BaseTest
+- Centralized WebDriver setup
+- Explicit waits (WebDriverWait)
+- Allure integration with TestNG listener
+- Clean project structure with proper `.gitignore`
+
+---
+
+## 👨‍💻 Author
+
+Portfolio project created to demonstrate practical Selenium automation skills and test framework design.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
