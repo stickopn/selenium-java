@@ -22,11 +22,8 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Run tests (with virtual display)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y xvfb
-          xvfb-run -a mvn -q clean test
+	- name: Run tests
+ 	 run: mvn -q clean test
 
       - name: Upload Surefire reports (always)
         if: always()
