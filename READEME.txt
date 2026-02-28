@@ -70,6 +70,9 @@ mvn clean test -Dheadless=true
 Run specific test class:
 mvn -Dtest=LoginTests test
 
+Verify Parallel Execution
+You can print the thread ID inside any test:
+System.out.println("Thread ID: " + Thread.currentThread().getId());
 
 ---
 

@@ -9,7 +9,7 @@ import saucedemo.pages.ProductsPage;
 
 public class AddToCartTests extends BaseTest {
     @Test
-    public void addOneItemToCart() {
+    public void addOneItemToCart() throws InterruptedException {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
@@ -22,5 +22,9 @@ public class AddToCartTests extends BaseTest {
 
         CartPage cartPage = productsPage.openCart();
         Assert.assertTrue(cartPage.hasItemNamed("Sauce Labs Backpack"), "Backpack nije u korpi!");
+
+//        Provera za paralelno izvrsavanje testova
+        Thread.sleep(2000);
+        System.out.println("Thread ID: " + Thread.currentThread().getId());
     }
 }

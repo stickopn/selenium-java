@@ -24,12 +24,11 @@ public abstract class BaseTest {
 
         ChromeOptions options = new ChromeOptions();
 
-        // stabilnije okruženje (može ostati)
+        // stabilnije okruženje
         options.addArguments("--incognito");
         options.addArguments("--disable-notifications");
 
         // ✅ CI/headless safe
-        // (radi i lokalno, ali ako želiš da lokalno vidiš browser, kasnije ćemo dodati toggle)
         boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 
         if (headless) {
@@ -52,8 +51,6 @@ public abstract class BaseTest {
         driverTL.set(driver);
 
         getDriver().get("https://www.saucedemo.com/");
-        // nemoj maximize u headless-u (nije potrebno i zna da pravi čudne greške)
-        // getDriver().manage().window().maximize();
 
         System.out.println("Thread ID: " + Thread.currentThread().getId());
     }
