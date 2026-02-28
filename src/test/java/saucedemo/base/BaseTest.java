@@ -6,63 +6,64 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Listeners({
-        io.qameta.allure.testng.AllureTestNg.class,
-        saucedemo.base.TestListener.class
-})
-
 public abstract class BaseTest {
-    protected WebDriver driver;
 
-    @BeforeMethod
+    private static final ThreadLocal<WebDriver> driverTL = new ThreadLocal<>();
+
+    protected WebDriver getDriver() {
+        return driverTL.get();
+    }
+
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
 
-        // (opciono) stabilnije okruženje
+        // stabilnije okruženje (može ostati)
         options.addArguments("--incognito");
         options.addArguments("--disable-notifications");
 
-        // ako je CI (GitHub Actions automatski setuje CI=true)
-        boolean isCI = "true".equalsIgnoreCase(System.getenv("CI"));
+        // ✅ CI/headless safe
+        // (radi i lokalno, ali ako želiš da lokalno vidiš browser, kasnije ćemo dodati toggle)
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 
-        if (isCI) {
+        if (headless) {
             options.addArguments("--headless=new");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--window-size=1920,1080");
         } else {
-            // lokalno: može maximize ili start-maximized
             options.addArguments("--start-maximized");
         }
 
-        // ugasi password manager + leak detection popup
+        // ugasi password manager/leak popup
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("credentials_enable_service", false);
         prefs.put("profile.password_manager_enabled", false);
         prefs.put("profile.password_manager_leak_detection", false);
         options.setExperimentalOption("prefs", prefs);
 
-        driver = new ChromeDriver(options);
+        WebDriver driver = new ChromeDriver(options);
+        driverTL.set(driver);
 
-        // BITNO: ne maximize u CI/headless
-        if (!isCI) {
-            driver.manage().window().maximize(); // može i da izbrišeš skroz jer imaš --start-maximized
-        }
+        getDriver().get("https://www.saucedemo.com/");
+        // nemoj maximize u headless-u (nije potrebno i zna da pravi čudne greške)
+        // getDriver().manage().window().maximize();
 
-        driver.get("https://www.saucedemo.com/");
+        System.out.println("Thread ID: " + Thread.currentThread().getId());
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
+        WebDriver driver = getDriver();
         if (driver != null) {
             driver.quit();
         }
+        driverTL.remove();
     }
 }

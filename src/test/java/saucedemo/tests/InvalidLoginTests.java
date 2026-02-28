@@ -8,7 +8,7 @@ import saucedemo.pages.LoginPage;
 public class InvalidLoginTests extends BaseTest {
     @Test
     public void invalidLoginShowsErrorMessage() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("pogresna_sifra")
                 .clickLogin();
@@ -21,9 +21,9 @@ public class InvalidLoginTests extends BaseTest {
                 "Neocekivan error text: " + error
         );
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("saucedemo.com"),
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("saucedemo.com"),
                 "URL nije sa saucedemo domena");
-        Assert.assertFalse(driver.getCurrentUrl().contains("inventory"),
+        Assert.assertFalse(getDriver().getCurrentUrl().contains("inventory"),
                 "Ne bi smeli da udjemo na inventory sa pogresnim loginom!");
     }
 }

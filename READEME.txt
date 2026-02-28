@@ -63,6 +63,9 @@ src
 Run all tests:
 mvn clean test
 
+Or headless mode
+mvn clean test -Dheadless=true
+
 
 Run specific test class:
 mvn -Dtest=LoginTests test

@@ -8,13 +8,13 @@ import saucedemo.pages.*;
 public class CheckoutMissingZipTests extends BaseTest {
     @Test(priority = 1)
     public void checkoutWithoutZipShowsError() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
                 .clickLogin();
 
 
-        ProductsPage productsPage = new ProductsPage(driver);
+        ProductsPage productsPage = new ProductsPage(getDriver());
         productsPage.addBackpackToCart();
         CartPage cartPage = productsPage.openCart();
 
@@ -27,7 +27,7 @@ public class CheckoutMissingZipTests extends BaseTest {
                 .clickContinueExpectError();
 
         Assert.assertTrue(infoPage.hasError(), "Očekujem error banner kad fali ZIP!");
-        Assert.assertTrue(driver.getCurrentUrl().contains("checkout-step-one"),
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("checkout-step-one"),
                 "Treba da ostanemo na checkout-step-one kad fali ZIP");
 
         String error = infoPage.getErrorText();
@@ -37,19 +37,19 @@ public class CheckoutMissingZipTests extends BaseTest {
         );
 
         Assert.assertTrue(
-                driver.getCurrentUrl().contains("checkout-step-one"),
+                getDriver().getCurrentUrl().contains("checkout-step-one"),
                 "Trebalo bi da ostanemo na checkout-step-one kad fali ZIP!"
         );
     }
 
     @Test(priority = 2)
     public void checkoutWithoutFirstNameShowsError() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
                 .clickLogin();
 
-        ProductsPage productsPage = new ProductsPage(driver);
+        ProductsPage productsPage = new ProductsPage(getDriver());
         productsPage.addBackpackToCart();
 
         CartPage cartPage = productsPage.openCart();
@@ -65,18 +65,18 @@ public class CheckoutMissingZipTests extends BaseTest {
         Assert.assertTrue(infoPage.getErrorText().contains("First Name is required"),
                 "Pogresan error tekst: " + infoPage.getErrorText());
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("checkout-step-one"),
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("checkout-step-one"),
                 "Trebalo bi da ostanemo na checkout-step-one.");
     }
 
     @Test(priority = 3)
     public void checkoutFinishShowsThankYou() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
                 .clickLogin();
 
-        ProductsPage productsPage = new ProductsPage(driver);
+        ProductsPage productsPage = new ProductsPage(getDriver());
         productsPage.addBackpackToCart();
 
         CartPage cartPage = productsPage.openCart();

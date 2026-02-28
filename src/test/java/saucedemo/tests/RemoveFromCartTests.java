@@ -10,12 +10,12 @@ import saucedemo.pages.ProductsPage;
 public class RemoveFromCartTests extends BaseTest {
     @Test(priority = 1)
     public void removeItemFromCart() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
                 .clickLogin();
 
-        ProductsPage productsPage = new ProductsPage(driver);
+        ProductsPage productsPage = new ProductsPage(getDriver());
         productsPage.addBackpackToCart();
         Assert.assertEquals(productsPage.getCartBadgeCount(), 1);
 

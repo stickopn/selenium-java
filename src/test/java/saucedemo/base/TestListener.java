@@ -16,7 +16,7 @@ public class TestListener implements ITestListener {
 
         // očekujemo da svi testovi nasleđuju BaseTest i imaju "driver"
         if (instance instanceof BaseTest) {
-            WebDriver driver = ((BaseTest) instance).driver;
+            WebDriver driver = ((BaseTest) instance).getDriver();
 
             if (driver != null) {
                 try {

@@ -10,12 +10,12 @@ import saucedemo.pages.ProductsPage;
 public class AddToCartTests extends BaseTest {
     @Test
     public void addOneItemToCart() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
                 .clickLogin();
 
-        ProductsPage productsPage = new ProductsPage(driver);
+        ProductsPage productsPage = new ProductsPage(getDriver());
         productsPage.addBackpackToCart();
 
         Assert.assertEquals(productsPage.getCartBadgeCount(), 1, "Badge count nije 1!");

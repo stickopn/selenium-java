@@ -13,12 +13,12 @@ import java.util.List;
 public class SortTests extends BaseTest {
     @Test(priority = 1)
     public void sortByNameAZ() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
                 .clickLogin();
 
-        ProductsPage productsPage = new ProductsPage(driver);
+        ProductsPage productsPage = new ProductsPage(getDriver());
         Assert.assertTrue(productsPage.isAt(), "Nismo na Products stranici posle logina!");
 
         productsPage.selectSortByValue("az");
@@ -32,12 +32,12 @@ public class SortTests extends BaseTest {
 
     @Test(priority = 2)
     public void sortByPriceLowToHigh() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
                 .clickLogin();
 
-        ProductsPage productsPage = new ProductsPage(driver);
+        ProductsPage productsPage = new ProductsPage(getDriver());
         Assert.assertTrue(productsPage.isAt(), "Nismo na Products stranici posle logina!");
 
         productsPage.selectSortByValue("lohi");

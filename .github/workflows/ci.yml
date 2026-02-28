@@ -23,7 +23,7 @@ jobs:
           cache: maven
 
       - name: Run tests
-        run: mvn -q clean test
+      run: mvn -q clean test -Dheadless=true
 
       - name: Upload Surefire reports (always)
         if: always()

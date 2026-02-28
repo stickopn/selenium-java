@@ -8,11 +8,11 @@ import saucedemo.pages.LoginPage;
 public class LoginTests extends BaseTest {
     @Test
     public void loginTest() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
                 .clickLogin();
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("inventory"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("inventory"));
     }
 }

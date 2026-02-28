@@ -8,12 +8,12 @@ import saucedemo.pages.*;
 public class CheckoutToOverviewTests extends BaseTest {
     @Test
     public void checkoutToOverview() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
                 .clickLogin();
 
-        ProductsPage productsPage = new ProductsPage(driver);
+        ProductsPage productsPage = new ProductsPage(getDriver());
         productsPage.addBackpackToCart();
 
         CartPage cartPage = productsPage.openCart();
@@ -28,13 +28,13 @@ public class CheckoutToOverviewTests extends BaseTest {
 
         Assert.assertTrue(overview.isAt());
 
-        System.out.println("URL: " + driver.getCurrentUrl());
+        System.out.println("URL: " + getDriver().getCurrentUrl());
 
         if (infoPage.hasError()) {
             System.out.println("ERROR: " + infoPage.getErrorText());
         }
 
-        System.out.println("URL: " + driver.getCurrentUrl());
+        System.out.println("URL: " + getDriver().getCurrentUrl());
         System.out.println("TITLE: " + overview.getTitleText());
         Assert.assertTrue(overview.isAt(), "Nismo na Checkout: Overview stranici!");
     }

@@ -9,14 +9,14 @@ import saucedemo.pages.ProductsPage;
 public class LogoutTests extends BaseTest {
     @Test
     public void logoutTest() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeUsername("standard_user")
                 .typePassword("secret_sauce")
                 .clickLogin();
 
-        ProductsPage productsPage = new ProductsPage(driver);
+        ProductsPage productsPage = new ProductsPage(getDriver());
         productsPage.openMenu().clickLogout();
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("saucedemo.com/"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("saucedemo.com/"));
     }
 }
